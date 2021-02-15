@@ -1,20 +1,34 @@
-ConfiRed (light & basic PHP MVC Framework)
+# ConfiRed (light & basic PHP MVC Framework)
+
 Developed by Wilfred V. Pine © 2020
+
 Version: 1.4.0
 
-System Configuration
+
+## System Configuration
+
     suit/dev
+
         config.php - configure environment, base_url
-        db.php - database configuration info
+
+        db.php - database configuration
+
         map.php - set routing configuration
+
+            ```php
             // Default controller to load
             define('DEFAULT_CONTROLLER', 'Home');
             define('DEFAULT_METHOD', 'index');
-            //
+
+            // roouting
             Map::site(['Login'=>'Access']);
             Map::site(['Logging-in'=>'Access/signing_in']);
             Map::site(['Category-list/@any'=>'Category/index/$1']);
+            ```
+
         startup.php - load services on startup
+
+            ```php
             // Models
             define('MODELS', array('access'));
             // Helpers
@@ -25,45 +39,84 @@ System Configuration
             define('LIBRARIES', array('protection','form'));
             // Function
             define('FUNCTIONS', array('setting','notification','filename'));
+            ```
 
-System Controller
-    contruct
-        #if not added to startup
+## System Controller
+
+    contructor
+
+        *if not added to startup
+
+            ```php
             $this->callLibraries(['form']);
             $this->callLibraries(['session']);
+            ```
+        *use Object
 
-        /* 1. use Object */
-
+            ```php
             $this->form = new Form;
             $this->session = new Session;
+            ```
+    methods
 
-            ex: $this->form->post('username');
+        -POST
+
+            *use Object
+
+                ```php
+                $this->form->post('username');
                 $this->session->push(['username'=>'Juan']);
+                ```
+            ### or
 
-        /* 2. Static functions associated with the class */
+            *use Static functions associated with the class
 
-            ex: Form::post('username');
+                ```php
+                Form::post('username');
                 Session::push(['username'=>'Juan']);
+                ```
 
-    Passing data with model
-        $data['users'] = $this->access_model->users();
+        -Passing data with model
 
-    Clean Data before post
-        cleanData($_POST['username']);
+            ```php
+            $data['users'] = $this->access_model->users();
+            ```
 
-    CSRF
-        // generate
-        CSRFToken();
-        // validate
-        if(CSRFProtect(cleanData($_POST['token'])))
+        -Clean Data before post if not using Form Library
 
-    GUI
-        $this->preview('home',$data);
+            ```php
+            cleanData($_POST['username']);
+            ```
 
-    Header Location
-        transmit('Access');
+        -CSRF
 
-System Model
+            ```php
+            /* generate */
+            echo CSRFToken();
+            /* validate */
+            if(CSRFProtect(cleanData($_POST['token'])))
+            {
+                
+            }
+            ```
+
+        -View
+
+            ```php
+            $this->preview('home',$data);
+            ```
+
+        -Header Location / redirect
+
+            ```php
+            transmit('Access');
+            ```
+
+## System Model
+
+visit: [phpdelusions](https://phpdelusions.net/pdo)
+
+```php
     public function users($id){
         $sql = "SELECT * FROM users WHERE id = :id LIMIT 1";
         $query = $this->db->prepare($sql);
@@ -71,32 +124,54 @@ System Model
         $query->execute($parameters);
         return ($query->rowcount() ? $query->fetch() : false);
     }
-    visit: https://phpdelusions.net/pdo
+```
 
-System View
+## System View
+
     Sanitize Data
-        echo Sanitize($data['column']);
+
+    ```php
+    echo Sanitize($data['column']);
+    ```
 
     External CSS / JS
-        // require style.css
-        callCSS(array('style'));
-        // require custom.js
-        callJS(array('custom'));
+
+    ```php
+    // require style.css
+    callCSS(array('style'));
+    // require custom.js
+    callJS(array('custom'));
+    ```
 
     Active page
-        // active('Home');
-        <li class="<?php active('Home'); ?>"><a href="">Home</a></li>
+
+    ```php
+    // active('Home');
+    <li class="<?php active('Home'); ?>"><a href="">Home</a></li>
+    ```
 
     Notification
-        notify(); // suit/glob/Notification.php
 
-Create Global functions
+    ```php
+    notify(); // suit/glob/Notification.php
+    ```
+
+## Create Global functions
+
     suit/glob/filename.php
-    // set the functions on startup
-        // suit/dev/startup.php
-            define('FUNCTIONS', array('setting','notification','filename'));
 
-Session
+    ```php
+    // set the functions on startup
+    // suit/dev/startup.php
+    define('FUNCTIONS', array('setting','notification','filename'));
+    ```
+
+## Session
+
+    ```php
     Session::pull('username')
     Session::push(['name'=>'data','username'=>$username])
+    ```
 
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
