@@ -11,7 +11,23 @@ Version: 1.4.0
 
 * config.php - configure environment, base_url
 
+```php
+define('ENVIRONMENT', 'development');
+//define('ENVIRONMENT', 'production');
+define('BASE_URL', 'https://confired.com/');
+//define('BASE_URL', 'http://localhost/confired/');
+```
+
 * db.php - database configuration
+
+```php
+define('DBHOST','localhost');
+define('DBNAME','confired');
+define('DBUSER','root');
+define('DBPASS','');
+define('CHARSET','utf8');
+define('DBPORT',':3306');
+```
 
 * map.php - set routing configuration
 
