@@ -1,4 +1,4 @@
-# ConfiRed (light & basic PHP MVC Framework)
+# [ConfiRed](https://confired.com) (light & basic PHP MVC Framework)
 
 Developed by Wilfred V. Pine © 2020
 
@@ -7,171 +7,172 @@ Version: 1.4.0
 
 ## System Configuration
 
-    suit/dev
+### suit/dev
 
-        config.php - configure environment, base_url
+* config.php - configure environment, base_url
 
-        db.php - database configuration
+* db.php - database configuration
 
-        map.php - set routing configuration
+* map.php - set routing configuration
 
-            ```php
-            // Default controller to load
-            define('DEFAULT_CONTROLLER', 'Home');
-            define('DEFAULT_METHOD', 'index');
+```php
+// Default controller to load
+define('DEFAULT_CONTROLLER', 'Home');
+define('DEFAULT_METHOD', 'index');
 
-            // roouting
-            Map::site(['Login'=>'Access']);
-            Map::site(['Logging-in'=>'Access/signing_in']);
-            Map::site(['Category-list/@any'=>'Category/index/$1']);
-            ```
+// roouting
+Map::site(['Login'=>'Access']);
+Map::site(['Logging-in'=>'Access/signing_in']);
+Map::site(['Category-list/@any'=>'Category/index/$1']);
+```
 
-        startup.php - load services on startup
+* startup.php - load services on startup
 
-            ```php
-            // Models
-            define('MODELS', array('access'));
-            // Helpers
-            define('HELPERS', array('page_url','session'));
-            // Addons
-            define('ADD_ON', array());
-            // Libraries
-            define('LIBRARIES', array('protection','form'));
-            // Function
-            define('FUNCTIONS', array('setting','notification','filename'));
-            ```
+```php
+// Models
+define('MODELS', array('access'));
+// Helpers
+define('HELPERS', array('page_url','session'));
+// Addons
+define('ADD_ON', array());
+// Libraries
+define('LIBRARIES', array('protection','form'));
+// Function
+define('FUNCTIONS', array('setting','notification','filename'));
+```
 
 ## System Controller
 
-    contructor
+### contructor
 
-        *if not added to startup
+* if not added to startup
 
-            ```php
-            $this->callLibraries(['form']);
-            $this->callLibraries(['session']);
-            ```
-        *use Object
+```php
+$this->callLibraries(['form']);
+$this->callLibraries(['session']);
+```
+* use Object
 
-            ```php
-            $this->form = new Form;
-            $this->session = new Session;
-            ```
-    methods
+```php
+$this->form = new Form;
+$this->session = new Session;
+```
 
-        -POST
+### methods
 
-            *use Object
+-POST
 
-                ```php
-                $this->form->post('username');
-                $this->session->push(['username'=>'Juan']);
-                ```
-            ### or
+* use Object
 
-            *use Static functions associated with the class
+```php
+$this->form->post('username');
+$this->session->push(['username'=>'Juan']);
+```
+ or
 
-                ```php
-                Form::post('username');
-                Session::push(['username'=>'Juan']);
-                ```
+* use Static functions associated with the class
 
-        -Passing data with model
+```php
+Form::post('username');
+Session::push(['username'=>'Juan']);
+```
 
-            ```php
-            $data['users'] = $this->access_model->users();
-            ```
+* Passing data with model
 
-        -Clean Data before post if not using Form Library
+```php
+$data['users'] = $this->access_model->users();
+```
 
-            ```php
-            cleanData($_POST['username']);
-            ```
+* Clean Data before post if not using Form Library
 
-        -CSRF
+```php
+cleanData($_POST['username']);
+```
 
-            ```php
-            /* generate */
-            echo CSRFToken();
-            /* validate */
-            if(CSRFProtect(cleanData($_POST['token'])))
-            {
-                
-            }
-            ```
+* CSRF
 
-        -View
+```php
+/* generate */
+echo CSRFToken();
+/* validate */
+if(CSRFProtect(cleanData($_POST['token'])))
+{
+    
+}
+```
 
-            ```php
-            $this->preview('home',$data);
-            ```
+* View
 
-        -Header Location / redirect
+```php
+$this->preview('home',$data);
+```
 
-            ```php
-            transmit('Access');
-            ```
+* Header Location / redirect
+
+```php
+transmit('Access');
+```
 
 ## System Model
 
-visit: [phpdelusions](https://phpdelusions.net/pdo)
+### visit: [phpdelusions](https://phpdelusions.net/pdo)
 
 ```php
-    public function users($id){
-        $sql = "SELECT * FROM users WHERE id = :id LIMIT 1";
-        $query = $this->db->prepare($sql);
-        $parameters = array(':id' => $id);
-        $query->execute($parameters);
-        return ($query->rowcount() ? $query->fetch() : false);
-    }
+public function users($id){
+    $sql = "SELECT * FROM users WHERE id = :id LIMIT 1";
+    $query = $this->db->prepare($sql);
+    $parameters = array(':id' => $id);
+    $query->execute($parameters);
+    return ($query->rowcount() ? $query->fetch() : false);
+}
 ```
 
 ## System View
 
-    Sanitize Data
+* Sanitize Data
 
-    ```php
-    echo Sanitize($data['column']);
-    ```
+```php
+echo Sanitize($data['column']);
+```
 
-    External CSS / JS
+* External CSS / JS
 
-    ```php
-    // require style.css
-    callCSS(array('style'));
-    // require custom.js
-    callJS(array('custom'));
-    ```
+```php
+// require style.css
+callCSS(array('style'));
+// require custom.js
+callJS(array('custom'));
+```
 
-    Active page
+* Active page
 
-    ```php
-    // active('Home');
-    <li class="<?php active('Home'); ?>"><a href="">Home</a></li>
-    ```
+```php
+// active('Home');
+<li class="<?php active('Home'); ?>"><a href="">Home</a></li>
+```
 
-    Notification
+* Alerts / Notification
 
-    ```php
-    notify(); // suit/glob/Notification.php
-    ```
+```php
+notify(); // suit/glob/Notification.php
+```
 
 ## Create Global functions
 
-    suit/glob/filename.php
+* suit/glob/filename.php
 
-    ```php
-    // set the functions on startup
-    // suit/dev/startup.php
-    define('FUNCTIONS', array('setting','notification','filename'));
-    ```
+```php
+// set the functions on startup
+// suit/dev/startup.php
+define('FUNCTIONS', array('setting','notification','filename'));
+```
 
 ## Session
 
-    ```php
-    Session::pull('username')
-    Session::push(['name'=>'data','username'=>$username])
-    ```
+```php
+Session::pull('username')
+Session::push(['name'=>'data','username'=>$username])
+```
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://github.com/redmalmon/confired/blob/main/LICENSE)
