@@ -61,7 +61,7 @@ class Form{
 	 */
     static function get($get){
 		if(isset($_GET[$get])){
-			return cleanData($_GET[$input]);
+			return cleanData($_GET[$get]);
 		}
 	}
 
