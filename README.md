@@ -1,5 +1,7 @@
 # [ConfiRed](https://confired.com) (light & basic PHP MVC Framework)
 
+A light and basic PHP MVC Framework. It was created to examine the structure of an MVC Framework and how it works. It uses static methods to implement Libraries or Helpers better, clear, and easy management. In some PHP versions, a static method is slower than non-static methods. You can also use object-oriented approach.
+
 Developed by Wilfred V. Pine © 2020
 
 Version: 1.4.0
