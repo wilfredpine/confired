@@ -75,16 +75,18 @@ defined('BASE_DIRECTORY') OR exit('Direct access are not allowed');
     if ( ! function_exists('extractMapURL')){
         // extract correct URL
         function extractMapURL($url, $route){
-            foreach($route as $pattern => $replacement){
-                $pattern = str_replace("@any", "(.+)", $pattern);
-                $pattern = str_replace("@num", "(\d+)", $pattern);
-                $pattern = '/' . str_replace("/", "\/", $pattern) . '/i';
-                $extractMapURL = preg_replace($pattern, $replacement, $url);
-                if($extractMapURL !== $url && $extractMapURL !== NULL){
-                    return $extractMapURL;
+            if($route){
+                foreach($route as $pattern => $replacement){
+                    $pattern = str_replace("@any", "(.+)", $pattern);
+                    $pattern = str_replace("@num", "(\d+)", $pattern);
+                    $pattern = '/' . str_replace("/", "\/", $pattern) . '/i';
+                    $extractMapURL = preg_replace($pattern, $replacement, $url);
+                    if($extractMapURL !== $url && $extractMapURL !== NULL){
+                        return $extractMapURL;
+                    }
                 }
+                return $url;
             }
-            return $url;
         }
     }
 

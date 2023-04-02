@@ -35,38 +35,12 @@ defined('BASE_DIRECTORY') OR exit('Direct access are not allowed');
  * @license https://opensource.org/licenses/MIT MIT License
  */
 
-    // -------  Default controller to load ------
-    define('DEFAULT_CONTROLLER', 'Welcome');
-    define('DEFAULT_METHOD', 'index');
-    
-    // --------  Error Controller ----------------
-    define('ERR_CONTROLLER', 'Errors');
+    class Welcome extends Caller{
+        
+        function index(){
+		    $this->preview('welcome_view');
+        }
 
-    
-
-    /*
-     * -------------------------------------------------------
-     *  Route
-     * -------------------------------------------------------
-     */
-
-    // Router::site(['Login'=>'Access']);
-    // Router::site(['Main'=>'Home']);
-    // Router::site(['Logging-in'=>'Access/signing_in']);
-    // Router::site(['Logging-out'=>'Access/signing_out']);
-
-    // Router::site(['Announcement-list/@any'=>'Announcement/index/$1']);
-    // Router::site(['Announcement-list'=>'Announcement']);
-    // Router::site(['Create-announcement'=>'Announcement/create']);
-    // Router::site(['Creating-announcement'=>'Announcement/creatingAnnouncement']);
-
-    // Router::site(['User-list/@any'=>'User/index/$1']);
-    // Router::site(['User-list'=>'User']);
-    // Router::site(['Create-user'=>'User/create']);
-    // Router::site(['Creating-user'=>'User/creatingUser']);
-
-    // Router::site(['MyProfile'=>'profile']);
-
-    //Router::site(['Update-announcement/@num/@any'=>'Announcement/edit/$1/$2']);
+    }
 
 ?>

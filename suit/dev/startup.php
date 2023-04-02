@@ -48,38 +48,41 @@ defined('BASE_DIRECTORY') OR exit('Direct access are not allowed');
     /*
      * -------------------------------------------------------
      *  Models
+     * array('home')
      * -------------------------------------------------------
      */
-    define('MODELS', array(
-        'home'
-    ));
+    define('MODELS', array());
     
     /*
      * -------------------------------------------------------
      *  Helpers
+     * array('page_url','protection')
      * -------------------------------------------------------
      */
-    define('HELPERS', array('page_url','protection'));
+    define('HELPERS', array());
 
     /*
      * -------------------------------------------------------
      *  AddOn
+     * array('pdf/jspdf')
      * -------------------------------------------------------
      */
-    define('ADD_ON', array('pdf/jspdf'));
+    define('ADD_ON', array());
 
     /*
      * -------------------------------------------------------
      *  Libraries
+     * array('session','form','date_time','pagination')
      * -------------------------------------------------------
      */
-    define('LIBRARIES', array('session','form','date_time','pagination'));
+    define('LIBRARIES', array());
 
     /*
      * -------------------------------------------------------
      *  Functions
+     * array('setting','notification')
      * -------------------------------------------------------
      */
-    define('FUNCTIONS', array('setting','notification'));
+    define('FUNCTIONS', array());
 
 ?>

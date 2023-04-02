@@ -3,7 +3,7 @@
     class jspdf{
 
         static function pdfopen($function,$orientation,$measurement,$papersize){
-            echo '<script src=" '.BASE_URL . 'resources/js/jspdf.debug.js"></script> 
+            echo '<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script> 
             <script> var '. $function .'= function () {
             $(document).ready(function () {' . "var doc = new jsPDF('".$orientation."', '".$measurement."'," .$papersize .");";
         }

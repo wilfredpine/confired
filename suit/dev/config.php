@@ -53,7 +53,7 @@ defined('BASE_DIRECTORY') OR exit('Direct access are not allowed');
      *  Base URL
      * -------------------------------------------------------
      */
-    define('BASE_URL', 'http://confired.framework/');
+    define('BASE_URL', 'http://localhost/confired/');
 
     // define only permitted url characters
     
