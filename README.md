@@ -193,4 +193,4 @@ Session::push(['name'=>'data','username'=>$username])
 ```
 
 ## License
-[MIT](https://github.com/wilfredpine/confired/blob/main/LICENSE)
+[GNU](https://github.com/wilfredpine/confired/blob/main/LICENSE)
